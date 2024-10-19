@@ -1,0 +1,374 @@
+14:39:01.767 [debug] Child {LoggerFileBackend, :general_log} of Supervisor Logger.Backends.Supervisor started
+Pid: #PID<0.113.0>
+Start Call: Logger.Backends.Watcher.start_link({{LoggerFileBackend, :general_log}, {LoggerFileBackend, :general_log}})
+Restart: :transient
+Shutdown: 5000
+Type: :worker
+14:39:01.770 [info] Child Logger.Backends.Supervisor of Supervisor Logger.Backends.Internal started
+Pid: #PID<0.112.0>
+Start Call: Logger.Backends.Supervisor.start_link([{LoggerFileBackend, :general_log}])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:39:01.771 [info] Child Logger.Backends.Internal of Supervisor Logger.Supervisor started
+Pid: #PID<0.108.0>
+Start Call: Logger.Backends.Internal.start_link([])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:39:01.771 [info] Application logger started at :nonode@nohost
+14:39:17.354 [info] Child :ttb_autostart of Supervisor :runtime_tools_sup started
+Pid: #PID<0.1521.0>
+Start Call: :ttb_autostart.start_link()
+Restart: :temporary
+Shutdown: 3000
+Type: :worker
+14:39:17.356 [info] Application runtime_tools started at :nonode@nohost
+14:39:17.373 [info] Application erts started at :nonode@nohost
+14:39:17.375 [info] Application lx_lexical_shared started at :nonode@nohost
+14:39:17.375 [info] Application lx_lexical_test started at :nonode@nohost
+14:39:17.423 [info] Child LXSnowflake.Generator of Supervisor #PID<0.1524.0> (Supervisor.Default) started
+Pid: #PID<0.1525.0>
+Start Call: LXSnowflake.Generator.start_link(1704070800000, 1)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:17.424 [info] Application lx_snowflake started at :nonode@nohost
+14:39:17.424 [info] Application lx_sourceror started at :nonode@nohost
+14:39:17.425 [info] Application lx_common started at :nonode@nohost
+14:39:17.425 [info] Application lx_elixir_sense started at :nonode@nohost
+14:39:17.426 [info] Application jason started at :nonode@nohost
+14:39:17.430 [info] Application logger_file_backend started at :nonode@nohost
+14:39:17.431 [info] Application lx_path_glob started at :nonode@nohost
+14:39:17.431 [info] Application lx_proto started at :nonode@nohost
+14:39:17.431 [info] Application lx_protocol started at :nonode@nohost
+14:39:17.739 [info] Child LXical.Document.Store of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1529.0>
+Start Call: LXical.Document.Store.start_link([derive: [analysis: &LXical.Ast.analyze/1]])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:17.806 [info] Child LXical.Server of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1530.0>
+Start Call: LXical.Server.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:17.806 [info] Child LXical.Server.ProjectSupervisor of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1531.0>
+Start Call: DynamicSupervisor.start_link([name: LXical.Server.ProjectSupervisor, strategy: :one_for_one])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:39:17.807 [info] Child LXical.Server.TaskQueue.State.TaskSupervisor of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1532.0>
+Start Call: Task.Supervisor.start_link([name: LXical.Server.TaskQueue.State.TaskSupervisor])
+Restart: :permanent
+Shutdown: :infinity
+Type: :supervisor
+14:39:17.807 [info] Child LXical.Server.TaskQueue of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1533.0>
+Start Call: LXical.Server.TaskQueue.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:17.807 [info] Child LXical.Server.Transport.StdIO of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1534.0>
+Start Call: LXical.Server.Transport.StdIO.start_link(:standard_io, &LXical.Server.protocol_message/1)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:17.810 [info] Application lx_server started at :nonode@nohost
+14:39:18.109 [info] Starting project at uri file:///home/mahmudsudo/aoc_elixir
+14:39:18.500 [info] Child {LXical.Server.Project.Progress, "aoc_elixir"} of Supervisor :"aoc_elixir::supervisor" started
+Pid: #PID<0.1536.0>
+Start Call: LXical.Server.Project.Progress.start_link(%{__struct__: LXical.Project, entropy: 50082, project_module: nil, mix_exs_uri: "file:///home/mahmudsudo/aoc_elixir/mix.exs", mix_project?: true, root_uri: "file:///home/mahmudsudo/aoc_elixir", env_variables: %{}, mix_env: nil, mix_target: nil})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:18.611 [info] Child {LXical.RemoteControl.ProjectNodeSupervisor, "aoc_elixir"} of Supervisor :"aoc_elixir::supervisor" started
+Pid: #PID<0.1537.0>
+Start Call: LXical.RemoteControl.ProjectNodeSupervisor.start_link(%{__struct__: LXical.Project, entropy: 50082, project_module: nil, mix_exs_uri: "file:///home/mahmudsudo/aoc_elixir/mix.exs", mix_project?: true, root_uri: "file:///home/mahmudsudo/aoc_elixir", env_variables: %{}, mix_env: nil, mix_target: nil})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:18.832 [info] Child :erl_epmd of Supervisor :net_sup started
+Pid: #PID<0.1540.0>
+Start Call: :erl_epmd.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:39:18.867 [info] Child :auth of Supervisor :net_sup started
+Pid: #PID<0.1541.0>
+Start Call: :auth.start_link()
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:39:18.947 [info] Child :net_kernel of Supervisor :net_sup started
+Pid: #PID<0.1542.0>
+Start Call: :net_kernel.start_link(%{name: :"manager-aoc_elixir-50082@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 2000
+Type: :worker
+14:39:18.957 [debug] Child :net_sup_dynamic of Supervisor :kernel_sup started
+Pid: #PID<0.1539.0>
+Start Call: :erl_distribution.start_link(%{name: :"manager-aoc_elixir-50082@127.0.0.1", supervisor: :net_sup_dynamic, name_domain: :longnames, clean_halt: false})
+Restart: :permanent
+Shutdown: 1000
+Type: :supervisor
+14:39:22.047 [error] Process #PID<0.1538.0> terminating
+** (exit) {:error, :start_timeout}
+    (stdlib 6.1.1) gen_server.erl:2210: :gen_server.init_it/6
+    (stdlib 6.1.1) proc_lib.erl:329: :proc_lib.init_p_do_apply/3
+Initial Call: LXical.Server.Project.Node.init/1
+Ancestors: [:"aoc_elixir::supervisor", LXical.Server.ProjectSupervisor, LXical.Server.Supervisor, #PID<0.1527.0>]
+Message Queue Length: 0
+Messages: []
+Links: [#PID<0.1535.0>]
+Dictionary: []
+Trapping Exits: false
+Status: :running
+Heap Size: 6772
+Stack Size: 29
+Reductions: 229616
+14:39:22.048 [error] Child {LXical.Server.Project.Node, "aoc_elixir"} of Supervisor :"aoc_elixir::supervisor" failed to start
+** (exit) {:error, :start_timeout}
+Start Call: LXical.Server.Project.Node.start_link(%{__struct__: LXical.Project, entropy: 50082, project_module: nil, mix_exs_uri: "file:///home/mahmudsudo/aoc_elixir/mix.exs", mix_project?: true, root_uri: "file:///home/mahmudsudo/aoc_elixir", env_variables: %{}, mix_env: nil, mix_target: nil})
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:22.100 [error] GenServer :"aoc_elixir::node_process" terminating
+** (stop) :start_timeout
+Last message: :maybe_start_timeout
+State: nil
+14:39:22.100 [error] Process :"aoc_elixir::node_process" (#PID<0.1545.0>) terminating
+** (exit) :start_timeout
+    (stdlib 6.1.1) gen_server.erl:2476: :gen_server.handle_common_reply/8
+    (stdlib 6.1.1) proc_lib.erl:329: :proc_lib.init_p_do_apply/3
+Initial Call: LXical.RemoteControl.ProjectNode.init/1
+Ancestors: [LXical.RemoteControl.ProjectNodeSupervisor, :"aoc_elixir::supervisor", LXical.Server.ProjectSupervisor, LXical.Server.Supervisor, #PID<0.1527.0>]
+Message Queue Length: 1
+Messages: [{:EXIT, #PID<0.1537.0>, :shutdown}]
+Links: [#Port<0.8>]
+Dictionary: []
+Trapping Exits: true
+Status: :running
+Heap Size: 6772
+Stack Size: 29
+Reductions: 63333
+14:39:22.124 [error] Child :undefined of Supervisor LXical.RemoteControl.ProjectNodeSupervisor shut down abnormally
+** (exit) :start_timeout
+Pid: #PID<0.1545.0>
+Start Call: LXical.RemoteControl.ProjectNode.start_link(%{__struct__: LXical.Project, entropy: 50082, project_module: nil, mix_exs_uri: "file:///home/mahmudsudo/aoc_elixir/mix.exs", mix_project?: true, root_uri: "file:///home/mahmudsudo/aoc_elixir", env_variables: %{}, mix_env: nil, mix_target: nil})
+Restart: :transient
+Shutdown: 5000
+Type: :worker
+14:39:22.151 [info] Lexical Initialized
+14:39:22.151 [info] opened file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex
+14:39:22.152 [info] opened file:///home/mahmudsudo/aoc_elixir/test/aoc_elixir_test.exs
+14:39:22.221 [info] Child of Supervisor :inet_gethost_native_sup started
+Pid: #PID<0.1549.0>
+Start Call: :inet_gethost_native.init([])
+14:39:22.222 [debug] Child :inet_gethost_native_sup of Supervisor :kernel_safe_sup started
+Pid: #PID<0.1548.0>
+Start Call: :inet_gethost_native.start_link()
+Restart: :temporary
+Shutdown: 1000
+Type: :worker
+14:39:22.265 [error] ** (ErlangError) Erlang error: {:erpc, :noconnection}
+    (kernel 10.1) erpc.erl:1376: :erpc.call/5
+    (lx_server 0.5.0) lib/lexical/server/provider/handlers/code_action.ex:16: LXical.Server.Provider.Handlers.CodeAction.handle/2
+    (lx_server 0.5.0) lib/lexical/server/task_queue.ex:77: anonymous fn/4 in LXical.Server.TaskQueue.State.as_task/2
+    (elixir 1.17.1) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+    (elixir 1.17.1) lib/task/supervised.ex:36: Task.Supervised.reply/4
+
+14:39:22.265 [error] ** (ErlangError) Erlang error: {:erpc, :noconnection}
+    (kernel 10.1) erpc.erl:1376: :erpc.call/5
+    (lx_server 0.5.0) lib/lexical/server/provider/handlers/document_symbols.ex:16: LXical.Server.Provider.Handlers.DocumentSymbols.handle/2
+    (lx_server 0.5.0) lib/lexical/server/task_queue.ex:77: anonymous fn/4 in LXical.Server.TaskQueue.State.as_task/2
+    (elixir 1.17.1) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+    (elixir 1.17.1) lib/task/supervised.ex:36: Task.Supervised.reply/4
+
+14:39:22.233 [error] GenServer LXical.Server terminating
+** (stop) {:erpc, :noconnection}
+    (kernel 10.1) erpc.erl:1376: :erpc.call/5
+    (lx_server 0.5.0) lib/lexical/server/state.ex:164: LXical.Server.State.apply/2
+    (lx_server 0.5.0) lib/lexical/server.ex:154: LXical.Server.apply_to_state/2
+    (lx_server 0.5.0) lib/lexical/server.ex:117: LXical.Server.handle_message/2
+    (lx_server 0.5.0) lib/lexical/server.ex:59: LXical.Server.handle_cast/2
+    (stdlib 6.1.1) gen_server.erl:2371: :gen_server.try_handle_cast/3
+    (stdlib 6.1.1) gen_server.erl:2433: :gen_server.handle_msg/6
+    (stdlib 6.1.1) proc_lib.erl:329: :proc_lib.init_p_do_apply/3
+Last message: {:"$gen_cast", {:protocol_message, %{__struct__: LXical.Protocol.Notifications.DidChange, document: nil, lsp: %{__struct__: LXical.Protocol.Notifications.DidChange.LSP, text_document: #Protocol.Types.TextDocument.Versioned.Identifier<[version: 118, uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/didChange", jsonrpc: "2.0", content_changes: [#Protocol.Types.TextDocument.ContentChangeEvent.TextDocumentContentChangeEvent<[text: "", range: #Protocol.Types.Range<[start: #Protocol.Types.Position<[line: 19, character: 18]>, end: #Protocol.Types.Position<[line: 19, character: 19]>]>, range_length: 1]>]}, text_document: nil, method: "textDocument/didChange", jsonrpc: "2.0", content_changes: nil}}}
+State: %{__struct__: LXical.Server.State, configuration: %{__struct__: LXical.Server.Configuration, project: %{__struct__: LXical.Project, entropy: 50082, project_module: nil, mix_exs_uri: "file:///home/mahmudsudo/aoc_elixir/mix.exs", mix_project?: true, root_uri: "file:///home/mahmudsudo/aoc_elixir", env_variables: %{}, mix_env: nil, mix_target: nil}, support: %{deprecated: true, __struct__: LXical.Server.Configuration.Support, snippet: true, work_done_progress: true, tags: #Protocol.Types.Completion.ClientCapabilities.TagSupport<[value_set: [:deprecated]]>, signature_help: #Protocol.Types.SignatureHelp.ClientCapabilities<[dynamic_registration: true, context_support: true, signature_information: #Protocol.Types.SignatureHelp.ClientCapabilities.SignatureInformation<[documentation_format: [:markdown, :plain_text], active_parameter_support: true, parameter_information: #Protocol.Types.SignatureHelp.ClientCapabilities.ParameterInformation<[label_offset_support: true]>]>]>, code_action_dynamic_registration: true, hierarchical_symbols: true}, client_name: "Visual Studio Code", dialyzer_enabled?: false, additional_watched_extensions: nil}, in_flight_requests: %{}, initialized?: true, shutdown_received?: false}
+14:39:22.371 [error] Process LXical.Server (#PID<0.1530.0>) terminating
+** (ErlangError) Erlang error: {:erpc, :noconnection}
+    (kernel 10.1) erpc.erl:1376: :erpc.call/5
+    (lx_server 0.5.0) lib/lexical/server/state.ex:164: LXical.Server.State.apply/2
+    (lx_server 0.5.0) lib/lexical/server.ex:154: LXical.Server.apply_to_state/2
+    (lx_server 0.5.0) lib/lexical/server.ex:117: LXical.Server.handle_message/2
+    (lx_server 0.5.0) lib/lexical/server.ex:59: LXical.Server.handle_cast/2
+    (stdlib 6.1.1) gen_server.erl:2371: :gen_server.try_handle_cast/3
+    (stdlib 6.1.1) gen_server.erl:2433: :gen_server.handle_msg/6
+    (stdlib 6.1.1) proc_lib.erl:329: :proc_lib.init_p_do_apply/3
+Initial Call: LXical.Server.init/1
+Ancestors: [LXical.Server.Supervisor, #PID<0.1527.0>]
+Message Queue Length: 8
+Messages: ["$gen_cast": {:protocol_message, %{id: 3, __struct__: LXical.Protocol.Requests.DocumentSymbols, document: nil, lsp: %{id: 3, __struct__: LXical.Protocol.Requests.DocumentSymbols.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: nil, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}}, "$gen_cast": {:protocol_message, %{id: nil, __struct__: LXical.Protocol.Notifications.Cancel, lsp: %{id: 2, __struct__: LXical.Protocol.Notifications.Cancel.LSP, method: "$/cancelRequest", jsonrpc: "2.0"}, method: "$/cancelRequest", jsonrpc: "2.0"}}, "$gen_cast": {:protocol_message, %{text: nil, __struct__: LXical.Protocol.Notifications.DidSave, document: nil, lsp: %{text: nil, __struct__: LXical.Protocol.Notifications.DidSave.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/didSave", jsonrpc: "2.0"}, text_document: nil, method: "textDocument/didSave", jsonrpc: "2.0"}}, "$gen_cast": {:protocol_message, %{id: nil, __struct__: LXical.Protocol.Notifications.Cancel, lsp: %{id: 1, __struct__: LXical.Protocol.Notifications.Cancel.LSP, method: "$/cancelRequest", jsonrpc: "2.0"}, method: "$/cancelRequest", jsonrpc: "2.0"}}, "$gen_cast": {:protocol_message, %{id: 4, __struct__: LXical.Protocol.Requests.DocumentSymbols, document: nil, lsp: %{id: 4, __struct__: LXical.Protocol.Requests.DocumentSymbols.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: nil, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}}, "$gen_cast": {:protocol_message, %{__struct__: LXical.Protocol.Notifications.DidChangeWatchedFiles, lsp: %{__struct__: LXical.Protocol.Notifications.DidChangeWatchedFiles.LSP, method: "workspace/didChangeWatchedFiles", jsonrpc: "2.0", changes: [#Protocol.Types.FileEvent<[type: :changed, uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>]}, method: "workspace/didChangeWatchedFiles", jsonrpc: "2.0", changes: nil}}, "$gen_cast": {:protocol_message, %{id: 5, __struct__: LXical.Protocol.Requests.CodeLens, document: nil, lsp: %{id: 5, __struct__: LXical.Protocol.Requests.CodeLens.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: nil, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}}, "$gen_cast": {:protocol_message, %{__struct__: LXical.Protocol.Notifications.DidChange, document: nil, lsp: %{__struct__: LXical.Protocol.Notifications.DidChange.LSP, text_document: #Protocol.Types.TextDocument.Versioned.Identifier<[version: 119, uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/didChange", jsonrpc: "2.0", content_changes: [#Protocol.Types.TextDocument.ContentChangeEvent.TextDocumentContentChangeEvent<[text: "S", range: #Protocol.Types.Range<[start: #Protocol.Types.Position<[line: 19, character: 18]>, end: #Protocol.Types.Position<[line: 19, character: 18]>]>, range_length: 0]>]}, text_document: nil, method: "textDocument/didChange", jsonrpc: "2.0", content_changes: nil}}]
+Links: [#PID<0.1528.0>]
+Dictionary: [rand_seed: {%{type: :exsss, next: #Function<0.40079776/1 in :rand.exsss_next>, bits: 58, uniform: #Function<1.40079776/1 in :rand.exsss_uniform>, uniform_n: #Function<2.40079776/2 in :rand.exsss_uniform>, jump: #Function<3.40079776/1 in :rand.exsplus_jump>}, [270878408579705125 | 133368442842618132]}]
+Trapping Exits: false
+Status: :running
+Heap Size: 4185
+Stack Size: 29
+Reductions: 28438
+14:39:22.682 [error] Child LXical.Server of Supervisor LXical.Server.Supervisor terminated
+** (exit) an exception was raised:
+    ** (ErlangError) Erlang error: {:erpc, :noconnection}
+        (kernel 10.1) erpc.erl:1376: :erpc.call/5
+        (lx_server 0.5.0) lib/lexical/server/state.ex:164: LXical.Server.State.apply/2
+        (lx_server 0.5.0) lib/lexical/server.ex:154: LXical.Server.apply_to_state/2
+        (lx_server 0.5.0) lib/lexical/server.ex:117: LXical.Server.handle_message/2
+        (lx_server 0.5.0) lib/lexical/server.ex:59: LXical.Server.handle_cast/2
+        (stdlib 6.1.1) gen_server.erl:2371: :gen_server.try_handle_cast/3
+        (stdlib 6.1.1) gen_server.erl:2433: :gen_server.handle_msg/6
+        (stdlib 6.1.1) proc_lib.erl:329: :proc_lib.init_p_do_apply/3
+Pid: #PID<0.1530.0>
+Start Call: LXical.Server.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:22.684 [info] Child LXical.Server of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1552.0>
+Start Call: LXical.Server.start_link([])
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:23.395 [error] Received textDocument/didSave before server was initialized
+14:39:23.427 [error] Failed to handle Elixir.LXical.Protocol.Notifications.DidSave, {{:error, :not_initialized}, %{__struct__: LXical.Server.State, configuration: nil, in_flight_requests: %{}, initialized?: false, shutdown_received?: false}}
+14:39:23.427 [error] Could not handle message LXical.Protocol.Notifications.DidSave :ok
+14:39:23.828 [error] Received workspace/didChangeWatchedFiles before server was initialized
+14:39:23.835 [error] Failed to handle Elixir.LXical.Protocol.Notifications.DidChangeWatchedFiles, {{:error, :not_initialized}, %{__struct__: LXical.Server.State, configuration: nil, in_flight_requests: %{}, initialized?: false, shutdown_received?: false}}
+14:39:23.835 [error] Could not handle message LXical.Protocol.Notifications.DidChangeWatchedFiles :ok
+14:39:23.944 [error] ** (FunctionClauseError) no function clause matching in LXical.Server.Provider.Handlers.DocumentSymbols.handle/2
+    (lx_server 0.5.0) lib/lexical/server/provider/handlers/document_symbols.ex:13: LXical.Server.Provider.Handlers.DocumentSymbols.handle(%{id: 9, __struct__: LXical.Protocol.Requests.DocumentSymbols, document: #Inspect.Error<
+  got UndefinedFunctionError with message:
+
+      """
+      function Code.Identifier.inspect_as_atom/1 is undefined or private
+      """
+
+  while inspecting:
+
+      %{
+        version: 118,
+        path: "/home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        __struct__: LXical.Document,
+        lines: %Lines<"defmodule AocElixir do..."(27 lines)>,
+        dirty?: true,
+        language_id: "elixir"
+      }
+
+  Stacktrace:
+
+    (elixir 1.17.1) Code.Identifier.inspect_as_atom(LXical.Document)
+    (lx_lexical_shared 0.5.0) lib/lexical/document.ex:25: Inspect.LXical.Document.inspect/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/inspect.ex:287: Inspect.List.keyword/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:478: Inspect.Algebra.container_each/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:455: Inspect.Algebra.container_doc/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/kernel.ex:2381: Kernel.inspect/2
+
+>, lsp: %{id: 9, __struct__: LXical.Protocol.Requests.DocumentSymbols.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/documentSymbol", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, nil)
+    (lx_server 0.5.0) lib/lexical/server/task_queue.ex:77: anonymous fn/4 in LXical.Server.TaskQueue.State.as_task/2
+    (elixir 1.17.1) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+    (elixir 1.17.1) lib/task/supervised.ex:36: Task.Supervised.reply/4
+
+14:39:24.192 [error] ** (FunctionClauseError) no function clause matching in LXical.Server.Provider.Handlers.CodeLens.handle/2
+    (lx_server 0.5.0) lib/lexical/server/provider/handlers/code_lens.ex:16: LXical.Server.Provider.Handlers.CodeLens.handle(%{id: 10, __struct__: LXical.Protocol.Requests.CodeLens, document: #Inspect.Error<
+  got UndefinedFunctionError with message:
+
+      """
+      function Code.Identifier.inspect_as_atom/1 is undefined or private
+      """
+
+  while inspecting:
+
+      %{
+        version: 118,
+        path: "/home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        __struct__: LXical.Document,
+        lines: %Lines<"defmodule AocElixir do..."(27 lines)>,
+        dirty?: true,
+        language_id: "elixir"
+      }
+
+  Stacktrace:
+
+    (elixir 1.17.1) Code.Identifier.inspect_as_atom(LXical.Document)
+    (lx_lexical_shared 0.5.0) lib/lexical/document.ex:25: Inspect.LXical.Document.inspect/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/inspect.ex:287: Inspect.List.keyword/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:478: Inspect.Algebra.container_each/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:455: Inspect.Algebra.container_doc/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/kernel.ex:2381: Kernel.inspect/2
+
+>, lsp: %{id: 10, __struct__: LXical.Protocol.Requests.CodeLens.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, nil)
+    (lx_server 0.5.0) lib/lexical/server/task_queue.ex:77: anonymous fn/4 in LXical.Server.TaskQueue.State.as_task/2
+    (elixir 1.17.1) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+    (elixir 1.17.1) lib/task/supervised.ex:36: Task.Supervised.reply/4
+
+14:39:32.768 [error] ** (FunctionClauseError) no function clause matching in LXical.Server.Provider.Handlers.CodeLens.handle/2
+    (lx_server 0.5.0) lib/lexical/server/provider/handlers/code_lens.ex:16: LXical.Server.Provider.Handlers.CodeLens.handle(%{id: 11, __struct__: LXical.Protocol.Requests.CodeLens, document: #Inspect.Error<
+  got UndefinedFunctionError with message:
+
+      """
+      function Code.Identifier.inspect_as_atom/1 is undefined or private
+      """
+
+  while inspecting:
+
+      %{
+        version: 118,
+        path: "/home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex",
+        __struct__: LXical.Document,
+        lines: %Lines<"defmodule AocElixir do..."(27 lines)>,
+        dirty?: true,
+        language_id: "elixir"
+      }
+
+  Stacktrace:
+
+    (elixir 1.17.1) Code.Identifier.inspect_as_atom(LXical.Document)
+    (lx_lexical_shared 0.5.0) lib/lexical/document.ex:25: Inspect.LXical.Document.inspect/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/inspect.ex:287: Inspect.List.keyword/2
+    (elixir 1.17.1) lib/inspect/algebra.ex:478: Inspect.Algebra.container_each/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:455: Inspect.Algebra.container_doc/6
+    (elixir 1.17.1) lib/inspect/algebra.ex:347: Inspect.Algebra.to_doc/2
+    (elixir 1.17.1) lib/kernel.ex:2381: Kernel.inspect/2
+
+>, lsp: %{id: 11, __struct__: LXical.Protocol.Requests.CodeLens.LSP, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, text_document: #Protocol.Types.TextDocument.Identifier<[uri: "file:///home/mahmudsudo/aoc_elixir/lib/aoc_elixir.ex"]>, method: "textDocument/codeLens", jsonrpc: "2.0", partial_result_token: nil, work_done_token: nil}, nil)
+    (lx_server 0.5.0) lib/lexical/server/task_queue.ex:77: anonymous fn/4 in LXical.Server.TaskQueue.State.as_task/2
+    (elixir 1.17.1) lib/task/supervised.ex:101: Task.Supervised.invoke_mfa/2
+    (elixir 1.17.1) lib/task/supervised.ex:36: Task.Supervised.reply/4
+
+14:39:45.373 [error] stdio received :eof, server will stop.
+14:39:45.470 [error] Child LXical.Server.Transport.StdIO of Supervisor LXical.Server.Supervisor terminated
+** (exit) normal
+Pid: #PID<0.1534.0>
+Start Call: LXical.Server.Transport.StdIO.start_link(:standard_io, &LXical.Server.protocol_message/1)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker
+14:39:45.498 [info] Child LXical.Server.Transport.StdIO of Supervisor LXical.Server.Supervisor started
+Pid: #PID<0.1556.0>
+Start Call: LXical.Server.Transport.StdIO.start_link(:standard_io, &LXical.Server.protocol_message/1)
+Restart: :permanent
+Shutdown: 5000
+Type: :worker

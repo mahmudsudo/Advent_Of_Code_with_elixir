@@ -1,0 +1,257 @@
+defmodule AdventOfCode do
+  # ... (previous code remains the same)
+
+  # Day 5 solutions
+  def day5_part1(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.count(&nice_string?/1)
+  end
+
+  def day5_part2(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.count(&nice_string_part2?/1)
+  end
+
+  defp nice_string?(str) do
+    has_three_vowels?(str) and has_double_letter?(str) and not has_forbidden_strings?(str)
+  end
+
+  defp has_three_vowels?(str) do
+    str
+    |> String.graphemes()
+    |> Enum.count(&(&1 in ~w(a e i o u)))
+    |> Kernel.>=(3)
+  end
+
+  defp has_double_letter?(str) do
+    String.match?(str, ~r/(.)\1/)
+  end
+
+  defp has_forbidden_strings?(str) do
+    String.match?(str, ~r/(ab|cd|pq|xy)/)
+  end
+
+  defp nice_string_part2?(str) do
+    has_pair_twice?(str) and has_repeat_with_one_between?(str)
+  end
+
+  defp has_pair_twice?(str) do
+    String.match?(str, ~r/(..).*\1/)
+  end
+
+  defp has_repeat_with_one_between?(str) do
+    String.match?(str, ~r/(.).\1/)
+  end
+
+  # Day 6 solutions
+  def day6_part1(input) do
+    grid = :array.new(1_000_000, default: 0)
+    
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.reduce(grid, &process_instruction/2)
+    |> :array.to_list()
+    |> Enum.sum()
+  end
+
+  def day6_part2(input) do
+    grid = :array.new(1_000_000, default: 0)
+    
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.reduce(grid, &process_instruction_brightness/2)
+    |> :array.to_list()
+    |> Enum.sum()
+  end
+
+  defp process_instruction(instruction, grid) do
+    [action | coords] = String.split(instruction)
+    [start_x, start_y, end_x, end_y] = coords |> List.flatten() |> Enum.map(&String.to_integer/1)
+
+    for x <- start_x..end_x, y <- start_y..end_y do
+      index = y * 1000 + x
+      case action do
+        "toggle" -> :array.set(index, 1 - :array.get(index, grid), grid)
+        "turn" <> " on" -> :array.set(index, 1, grid)
+        "turn" <> " off" -> :array.set(index, 0, grid)
+      end
+    end
+  end
+
+  defp process_instruction_brightness(instruction, grid) do
+    [action | coords] = String.split(instruction)
+    [start_x, start_y, end_x, end_y] = coords |> List.flatten() |> Enum.map(&String.to_integer/1)
+
+    for x <- start_x..end_x, y <- start_y..end_y do
+      index = y * 1000 + x
+      current = :array.get(index, grid)
+      case action do
+        "toggle" -> :array.set(index, current + 2, grid)
+        "turn" <> " on" -> :array.set(index, current + 1, grid)
+        "turn" <> " off" -> :array.set(index, max(0, current - 1), grid)
+      end
+    end
+  end
+
+  # Day 7 solutions
+  def day7_part1(input) do
+    circuit = parse_circuit(input)
+    evaluate_wire("a", circuit, %{})
+  end
+
+  def day7_part2(input) do
+    circuit = parse_circuit(input)
+    a_value = evaluate_wire("a", circuit, %{})
+    new_circuit = Map.put(circuit, "b", fn _ -> a_value end)
+    evaluate_wire("a", new_circuit, %{})
+  end
+
+  defp parse_circuit(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.map(&parse_instruction/1)
+    |> Enum.into(%{})
+  end
+
+  defp parse_instruction(instruction) do
+    [operation, wire] = String.split(instruction, " -> ")
+    {wire, parse_operation(operation)}
+  end
+
+  defp parse_operation(operation) do
+    cond do
+      String.contains?(operation, "AND") -> 
+        [a, b] = String.split(operation, " AND ")
+        fn cache -> bitwise_and(a, b, cache) end
+      String.contains?(operation, "OR") -> 
+        [a, b] = String.split(operation, " OR ")
+        fn cache -> bitwise_or(a, b, cache) end
+      String.contains?(operation, "LSHIFT") -> 
+        [a, b] = String.split(operation, " LSHIFT ")
+        fn cache -> lshift(a, String.to_integer(b), cache) end
+      String.contains?(operation, "RSHIFT") -> 
+        [a, b] = String.split(operation, " RSHIFT ")
+        fn cache -> rshift(a, String.to_integer(b), cache) end
+      String.starts_with?(operation, "NOT") -> 
+        [_, a] = String.split(operation, "NOT ")
+        fn cache -> bitwise_not(a, cache) end
+      true -> 
+        fn cache -> evaluate_operand(operation, cache) end
+    end
+  end
+
+  defp evaluate_wire(wire, circuit, cache) do
+    case Map.get(cache, wire) do
+      nil ->
+        value = circuit[wire].(cache)
+        {value, Map.put(cache, wire, value)}
+      value ->
+        {value, cache}
+    end
+  end
+
+  defp evaluate_operand(operand, cache) do
+    case Integer.parse(operand) do
+      {int, ""} -> int
+      _ -> elem(evaluate_wire(operand, circuit, cache), 0)
+    end
+  end
+
+  defp bitwise_and(a, b, cache), do: band(evaluate_operand(a, cache), evaluate_operand(b, cache))
+  defp bitwise_or(a, b, cache), do: bor(evaluate_operand(a, cache), evaluate_operand(b, cache))
+  defp lshift(a, b, cache), do: evaluate_operand(a, cache) <<< b
+  defp rshift(a, b, cache), do: evaluate_operand(a, cache) >>> b
+  defp bitwise_not(a, cache), do: bnot(evaluate_operand(a, cache)) &&& 0xFFFF
+
+  # Day 8 solutions
+  def day8_part1(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.map(fn line ->
+      code_chars = String.length(line)
+      memory_chars = line
+        |> Code.string_to_quoted!()
+        |> to_string()
+        |> String.length()
+      code_chars - memory_chars
+    end)
+    |> Enum.sum()
+  end
+
+  def day8_part2(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.map(fn line ->
+      encoded = line
+        |> String.replace("\\", "\\\\")
+        |> String.replace("\"", "\\\"")
+      String.length(~s("#{encoded}")) - String.length(line)
+    end)
+    |> Enum.sum()
+  end
+
+  # Day 9 solutions
+  def day9_part1(input) do
+    distances = parse_distances(input)
+    cities = Map.keys(distances) |> Enum.uniq()
+    permutations(cities)
+    |> Enum.map(&route_distance(&1, distances))
+    |> Enum.min()
+  end
+
+  def day9_part2(input) do
+    distances = parse_distances(input)
+    cities = Map.keys(distances) |> Enum.uniq()
+    permutations(cities)
+    |> Enum.map(&route_distance(&1, distances))
+    |> Enum.max()
+  end
+
+  defp parse_distances(input) do
+    input
+    |> String.split("\n", trim: true)
+    |> Enum.reduce(%{}, fn line, acc ->
+      [cities, distance] = String.split(line, " = ")
+      [city1, city2] = String.split(cities, " to ")
+      distance = String.to_integer(distance)
+      acc
+      |> Map.put({city1, city2}, distance)
+      |> Map.put({city2, city1}, distance)
+    end)
+  end
+
+  defp permutations([]), do: [[]]
+  defp permutations(list) do
+    for elem <- list, rest <- permutations(list -- [elem]), do: [elem | rest]
+  end
+
+  defp route_distance([city1, city2 | rest], distances) do
+    distances[{city1, city2}] + route_distance([city2 | rest], distances)
+  end
+  defp route_distance([_], _), do: 0
+
+  # Day 10 solutions
+  def day10_part1(input) do
+    Enum.reduce(1..40, input, fn _, acc ->
+      look_and_say(acc)
+    end)
+    |> String.length()
+  end
+
+  def day10_part2(input) do
+    Enum.reduce(1..50, input, fn _, acc ->
+      look_and_say(acc)
+    end)
+    |> String.length()
+  end
+
+  defp look_and_say(string) do
+    string
+    |> String.graphemes()
+    |> Enum.chunk_by(&(&1))
+    |> Enum.map(fn chunk -> "#{length(chunk)}#{hd(chunk)}" end)
+    |> Enum.join()
+  end
+end
